@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<HTML>
+
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- A biblioteca bundle já contem os arquivos JS do Bootstrap, Popper, e jQuery.
+    <script src="js/bootstrap.bundle.js"></script>-->
+    <title>FTT EC LP2 N1!!</title>
+    <LINK REL="stylesheet" HREF="css/bootstrap.css" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <STYLE>
+        .center-txt {
+            text-align: center;
+            color: black;
+            width: 90px;
+            padding: 4px;
+            margin:0;
+            border:0;
+        }
+        .button-selected {
+            background-color: #343a40;
+            color: white;
+            border-radius: 15px;
+        }       
+        .width-button-bar {
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-right: 0;
+            margin-left: 0;
+            
+        }
+        .bottom-button-bar {
+            margin:0;
+            padding:0;
+            border:0;
+            width: 100%;
+        }
+        .icon-font {
+            font-size: 40px;   
+        }
+        main {
+            padding-top: 56px;
+            padding-bottom: 50px;
+        }
+    </STYLE>
+    <SCRIPT>
+
+
+
+    </SCRIPT>
+</HEAD>
+
+<BODY lang="pt-br">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" href="#">&#x1F981; FTT EC LP2 N1!!!</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="index.html">Splash</a>
+                <a class="nav-item nav-link" href="http://www.fundacaosalvadorarena.org.br/" target="newpage">CEFSA</a>
+                <a class="nav-item nav-link" href="about.html">Sobre</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" id="aluno">
+        <div id="app">
+    <v-app>
+      <v-content>
+        <v-container>
+
+            <v-layout align-center justify-center>
+
+            <v-flex xs6>
+                <v-select :items="breeds"
+                        item-text="name"
+                        v-model="selected_breed"
+                        label="Breeds"
+                        return-object
+                        attach></v-select>
+            </v-flex>
+             
+            </v-layout>
+
+
+            <v-layout>
+                <v-flex xs12 sm8 offset-sm2>
+                  <v-card>
+
+  <v-carousel>
+      <v-carousel-item
+        v-for="(item,i) in images"
+        :key="i"
+        :src="item.url"
+      ></v-carousel-item>
+    </v-carousel>
+
+            
+                    <v-card-title primary-title>
+
+                    <div class="text-xs-center">
+                        <v-chip>
+                                <v-avatar>
+                                  <img :src="country_flag_url" :alt="selected_breed.country_code">
+                                </v-avatar>
+                        {{selected_breed.origin}}</v-chip>
+                        <v-chip v-if="selected_breed.experimental==1">Experimental</v-chip>
+                        <v-chip v-if="selected_breed.rex==1">Rex</v-chip>
+                        <v-chip v-if="selected_breed.natural==1">Natural</v-chip>
+                        <v-chip v-if="selected_breed.rare==1">Rare</v-chip>
+                        <v-chip v-if="selected_breed.hairless==1">Hairless</v-chip>
+                        <v-chip v-if="selected_breed.suppressed_tail==1">Suppressed Tail</v-chip>
+                        <v-chip v-if="selected_breed.short_legs==1">Short Legs</v-chip>
+                        <v-chip v-if="selected_breed.hypoallergenic==1">Hypoallergenic</v-chip>
+                    </div>
+                      <div>
+                        <h3 class="headline mb-0">{{selected_breed.name}}</h3>
+                        <div>{{selected_breed.description}}</div>
+                        <div>---</div>
+                        <div><i>{{selected_breed.temperament}}</i></div>
+                      </div>
+                    </v-card-title>
+
+
+                        <v-list>
+                                <v-list-tile @click="">
+                      
+                                  <v-list-tile-content>
+                                    
+                            Affection Level
+                                  </v-list-tile-content>
+                      
+                                  <v-list-tile-action>
+                                        <v-rating
+                                          v-model="selected_breed.affection_level "
+                                          readonly
+                                          size="18"
+                                        ></v-rating>
+                                </v-list-tile>
+                      
+                                <v-list-tile>
+                                  <v-list-tile-content>
+                                        Adaptability
+                                  </v-list-tile-content>
+                      
+                                  <v-list-tile-action>
+                                        <v-rating
+                                        v-model="selected_breed.adaptability "
+                                        readonly
+                                        size="18"
+                                      ></v-rating>
+                                </v-list-tile>
+                      
+                                <v-list-tile>
+                                <v-list-tile-content>
+                                        Child Friendly
+                                </v-list-tile-content>
+                    
+                                <v-list-tile-action>
+                                        <v-rating
+                                        v-model="selected_breed.child_friendly "
+                                        readonly
+                                        size="18"
+                                    ></v-rating>
+                                </v-list-tile>
+
+                                <v-list-tile>
+                                <v-list-tile-content>
+                                        Dog Friendly
+                                </v-list-tile-content>
+                    
+                                <v-list-tile-action>
+                                        <v-rating
+                                        v-model="selected_breed.dog_friendly "
+                                        readonly
+                                        size="18"
+                                    ></v-rating>
+                                </v-list-tile>
+                                
+                                <v-list-tile>
+                                        <v-list-tile-content>
+                                                Energy Level
+                                        </v-list-tile-content>
+                            
+                                        <v-list-tile-action>
+                                                <v-rating
+                                                v-model="selected_breed.energy_level "
+                                                readonly
+                                                size="18"
+                                            ></v-rating>
+                                        </v-list-tile>
+
+                                <v-list-tile>
+                                        <v-list-tile-content>
+                                                Grooming
+                                        </v-list-tile-content>
+                            
+                                        <v-list-tile-action>
+                                                <v-rating
+                                                v-model="selected_breed.grooming "
+                                                readonly
+                                                size="18"
+                                            ></v-rating>
+                                        </v-list-tile>
+                                
+                                <v-list-tile>
+                                        <v-list-tile-content>
+                                                Health Issues
+                                        </v-list-tile-content>
+                            
+                                        <v-list-tile-action>
+                                                <v-rating
+                                                v-model="selected_breed.health_issues "
+                                                readonly
+                                                size="18"
+                                            ></v-rating>
+                                        </v-list-tile>
+
+                                <v-list-tile>
+                                        <v-list-tile-content>
+                                                Intelligence
+                                        </v-list-tile-content>
+                            
+                                        <v-list-tile-action>
+                                                <v-rating
+                                                v-model="selected_breed.intelligence "
+                                                readonly
+                                                size="18"
+                                            ></v-rating>
+                                        </v-list-tile>
+                                
+                                <v-list-tile>
+                                        <v-list-tile-content>
+                                            Shedding Level
+                                        </v-list-tile-content>
+                            
+                                        <v-list-tile-action>
+                                                <v-rating
+                                                v-model="selected_breed.shedding_level "
+                                                readonly
+                                                size="18"
+                                            ></v-rating>
+                                        </v-list-tile>
+                                
+                                <v-list-tile>
+                                        <v-list-tile-content>
+                                                Social Needs
+                                        </v-list-tile-content>
+                            
+                                        <v-list-tile-action>
+                                                <v-rating
+                                                v-model="selected_breed.social_needs "
+                                                readonly
+                                                size="18"
+                                            ></v-rating>
+                                        </v-list-tile>
+                                  
+                                <v-list-tile>
+                                        <v-list-tile-content>
+                                                Stranger Friendly
+                                        </v-list-tile-content>
+                            
+                                        <v-list-tile-action>
+                                                <v-rating
+                                                v-model="selected_breed.stranger_friendly "
+                                                readonly
+                                                size="18"
+                                            ></v-rating>
+                                        </v-list-tile>    
+                                
+                                <v-list-tile>
+                                        <v-list-tile-content>
+                                                Vocalisation
+                                        </v-list-tile-content>
+                            
+                                        <v-list-tile-action>
+                                                <v-rating
+                                                v-model="selected_breed.vocalisation "
+                                                readonly
+                                                size="18"
+                                            ></v-rating>
+                                        </v-list-tile>  
+                                            
+                              </v-list>
+
+                    <v-card-actions>
+                      <v-btn:href="selected_breed.wikipedia_url" target="_blank" flat color="orange">Wikipedia</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+        </v-container>
+      </v-content>
+    </v-app>
+  </div>
+    </main>
+
+    <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
+        <div class="row w-100 bottom-button-bar">
+            <div class="col-sm center-txt"><b onclick='window.location="tab01news.html"'>News<br><span class="icon-font">&#x1f4f0;</span></b>
+            </div>
+            <div class="col-sm center-txt"><b onclick='window.location="tab02map.html"'>Map<br><span class="icon-font">&#x1f4cc;</span></b>
+            </div>
+            <div class="col-sm center-txt"><b onclick='window.location="tab03todo.html"'>Todo<br><span class="icon-font">&#x1F4DD;</span></b>
+            </div>
+            <div class="col-sm center-txt button-selected"><b onclick='window.location="tab04project.html"'>Cats<br><span class="icon-font">&#x1F981;</span></b>
+            </div>
+        </div>
+    </nav>
+    <script>
+    new Vue({ 
+        el: '#app',
+        data: {
+            country_flag_url:"",
+          images: [],
+          breeds:[],
+          selected_breed: {},
+          current_image: {}
+        },
+        created(){
+            this.getBreeds();
+        } ,
+        watch: {
+           
+            selected_breed: function()
+            {
+                console.log(this.selected_breed)
+                let country_code = this.selected_breed.country_code.toLowerCase();
+                this.country_flag_url = `https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/flags/1x1/${country_code}.svg`;
+                this.getImages();
+            }
+        },
+        methods:{
+            async getBreeds()
+            {
+                try{
+                    axios.defaults.headers.common['x-api-key'] = 'cf51d87b-5c2a-4276-ba74-39f4ef6d5b78' // Replace this with your API Key, as it's set to defaults it will be used from now onwards
+                    
+                    let response = await axios.get('https://api.thecatapi.com/v1/breeds/' ) 
+                    this.breeds = response.data;
+                    console.log("-- ("+this.breeds.length +") Breeds from TheCatAPI.com")
+                    
+                    // pick one to display initially
+                    this.selected_breed = this.breeds[10]
+                }catch(err){
+                    console.log(err)
+                }
+            },
+            async getImages()
+            {
+                try{
+                    
+                    let query_params = {
+                        breed_ids: this.selected_breed.id,
+                        limit:8
+                    }
+                    let response = await axios.get('https://api.thecatapi.com/v1/images/search', { params: query_params} ) 
+                    
+                    this.pagination_count = response.headers['pagination-count'];
+                    this.images = response.data 
+                    this.current_image = this.images[0]
+                    
+                    console.log("-- ("+this.images.length +") Images from TheCatAPI.com")
+                    console.log( this.pagination_count ,'images available for this query.')
+                    
+                }catch(err){
+                    console.log(err)
+                }
+            }
+            
+        }
+    })
+  </script>
+</BODY>
+<!-- carga de scripts do Bootstrap, JQuery, Popper -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+</HTML>
